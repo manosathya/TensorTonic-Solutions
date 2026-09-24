@@ -4,11 +4,11 @@ def text_chunking(tokens: list, chunk_size: int, overlap: int) -> list:
     """
     step_size = chunk_size - overlap
 
-    l = 0
+    start = 0
     output = []
     
-    while l < len(tokens) - overlap:
-        output.append(tokens[l:l + chunk_size])
-        l += step_size
+    while start < len(tokens) - overlap:
+        output.append(tokens[start:start + chunk_size])
+        start += step_size
         
     return output
