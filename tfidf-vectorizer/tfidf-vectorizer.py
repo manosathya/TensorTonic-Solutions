@@ -11,10 +11,8 @@ def tfidf_vectorizer(documents: list[str]) -> dict:
     tf = {}
     df = defaultdict(int)
     doc_len = len(documents)
-    #idf = defaultdict(int)
-    
-    #tf 
-
+   
+    #Create tf dictionary
     for i,doc in enumerate(documents):
         tf[i] = defaultdict(int)
         doc_tok = doc.strip().lower().split(" ")
@@ -25,13 +23,12 @@ def tfidf_vectorizer(documents: list[str]) -> dict:
             if tok not in tok_log:
                 df[tok] += 1
                 tok_log.add(tok)
-
+    
     vocab = sorted(df.keys())
     tf_idf = np.zeros((doc_len,len(vocab)))
 
-    idx = 0
+    #Calculate idf per token and populate tf_idf matrix
     for i, tok in enumerate(vocab):
-        #idf[tok] = log((i+1)/df[tok])
         idf = np.log((doc_len)/df[tok])
 
         for doc in range(doc_len):
